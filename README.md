@@ -1,5 +1,5 @@
 # About
-Here is my environment configuration files.
+Here are my environment configuration files.
 # How to try it out
 ```
 git clone git@github.com:sashadereh/my_env.git
