@@ -1,4 +1,4 @@
-# If not running interactively, don"t do anything
+# If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
@@ -15,11 +15,11 @@ export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 # /                                    Commands                                  \
 # \______________________________________________________________________________/
 
-# GPG agent auto run
+# Launch GPG agent
 gpgconf --launch gpg-agent
 gpg-connect-agent updatestartuptty /bye
 
-# All "read" commands goes below
+# All "read" commands
 echo "Welcome, $USER!"
 echo "Added keys"
 ssh-add -l
@@ -62,11 +62,11 @@ function strlen {
 }
 
 function extract {
- if [ -z "$1" ]; then
+  if [ -z "$1" ]; then
     echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
     echo "       extract <path/file_name_1.ext> [path/file_name_2.ext] [path/file_name_3.ext]"
     return 1
- else
+  else
     for n in $@
     do
       if [ -f "$n" ] ; then
@@ -93,7 +93,16 @@ function extract {
           return 1
       fi
     done
-fi
+  fi
+}
+
+function to_gif() {
+  ffmpeg -i "$1" "${1%.*}.gif" && gifsicle -O3 "${1%.*}.gif" -o "${1%.*}.gif"
+  if [ "$(uname)" == "Darwin" ] ; then
+    osascript -e "display notification \"${1%.*}.gif successfully converted\" with title \"GIF Created Successfully\""
+  else
+    echo "GIF Created Successfully"
+  fi
 }
 
 

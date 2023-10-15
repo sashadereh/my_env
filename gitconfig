@@ -1,5 +1,6 @@
 [user]
 	signingkey = 0A4901C6A17FB6298
+	name = Alexander Dzerakh
 [commit]
 	gpgsign = true
 [tag]
