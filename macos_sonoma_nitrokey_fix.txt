@@ -1,0 +1,5 @@
+# To fix macOS Sonoma issue with Nitrokey https://support.nitrokey.com/t/nitrokey-pro-not-detected-on-macos-sonoma/5455/7 run these commands:
+
+sudo mkdir -p /usr/local/libexec/SmartCardServices/drivers
+sudo cp -a /usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle /usr/local/libexec/SmartCardServices/drivers
+sudo reboot
