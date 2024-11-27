@@ -10,6 +10,8 @@ esac
 
 export GPG_TTY=$(tty)
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+export BASH_SILENCE_DEPRECATION_WARNING=1
+export PATH="$PATH:/Users/alex/.local/bin"
 
 #  ______________________________________________________________________________
 # /                                    Commands                                  \
@@ -34,7 +36,7 @@ then
   fi
 fi
 
-# Initialize asdf
+# Initialize asdf. Should always be the last one to be sourced.
 . "$(brew --prefix asdf)/libexec/asdf.sh"
 
 echo "Welcome, $USER!"
@@ -86,7 +88,7 @@ function extract {
     do
       if [ -f "$n" ] ; then
           case "${n%,}" in
-            *.tar.bz2|*.tar.gz|*.tar.xz|*.tbz2|*.tgz|*.txz|*.tar) 
+            *.tar.bz2|*.tar.gz|*.tar.xz|*.tbz2|*.tgz|*.txz|*.tar)
                          tar xvf "$n"       ;;
             *.lzma)      unlzma ./"$n"      ;;
             *.bz2)       bunzip2 ./"$n"     ;;
@@ -119,4 +121,3 @@ function to_gif() {
     echo "GIF Created Successfully"
   fi
 }
-
