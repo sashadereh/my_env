@@ -19,10 +19,25 @@ export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 gpg-connect-agent updatestartuptty /bye
 
-# All "read" commands
+# Enable brew bash completions
+if type brew &>/dev/null
+then
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]
+  then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  else
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*
+    do
+      [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
+    done
+  fi
+fi
+
+# Initialize asdf
+. "$(brew --prefix asdf)/libexec/asdf.sh"
+
 echo "Welcome, $USER!"
-echo "Added keys"
-ssh-add -l
 
 #  ______________________________________________________________________________
 # /                                    Aliases                                   \
