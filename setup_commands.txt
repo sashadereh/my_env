@@ -1,0 +1,9 @@
+To be scriptitized
+
+1. Install Homebrew
+2. Install pinentry-mac
+3. Install asdf
+4. Install gpg
+5. Run gpg —card-status
+6. Run gpg --recv-keys 0A4901C6A17FB6298 to fetch public key from the key server
+7. Run env rollout
